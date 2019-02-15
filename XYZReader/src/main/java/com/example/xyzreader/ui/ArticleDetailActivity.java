@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,7 @@ public class ArticleDetailActivity extends AppCompatActivity
         mPager.setPageMargin((int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics()));
         mPager.setPageMarginDrawable(new ColorDrawable(0x22000000));
+        mPager.setPageTransformer(true, new DepthPageTransformer());
 
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -176,6 +178,42 @@ public class ArticleDetailActivity extends AppCompatActivity
         @Override
         public int getCount() {
             return (mCursor != null) ? mCursor.getCount() : 0;
+        }
+    }
+
+    /*
+     * Pager transformation implemented following guide
+     * @ https://developer.android.com/training/animation/screen-slide#java
+     */
+    private class DepthPageTransformer implements ViewPager.PageTransformer {
+        private static final float MIN_SCALE = 0.75f;
+
+        @Override
+        public void transformPage(@NonNull View view, float position) {
+            int pageWidth = view.getWidth();
+
+            if (position < -1) {
+                // This page is way off-screen to the left.
+                view.setAlpha(0f);
+            }  else if (position <= 0) {
+                // Use the default slide transition when moving to the left page
+                view.setAlpha(1f);
+                view.setTranslationX(0f);
+                view.setScaleX(1f);
+                view.setScaleY(1f);
+            } else if (position <= 1) {
+                // Fade the page out.
+                view.setAlpha(1 - position);
+                // Counteract the default slide transition
+                view.setTranslationX(pageWidth * -position);
+                // Scale the page down (between MIN_SCALE and 1)
+                float scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - Math.abs(position));
+                view.setScaleX(scaleFactor);
+                view.setScaleY(scaleFactor);
+            } else {
+                // This page is way off-screen to the right.
+                view.setAlpha(0f);
+            }
         }
     }
 }
