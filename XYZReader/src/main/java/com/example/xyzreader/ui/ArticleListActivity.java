@@ -21,6 +21,8 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.example.xyzreader.R;
@@ -45,7 +47,7 @@ public class ArticleListActivity extends AppCompatActivity implements
     private static final String TAG = ArticleListActivity.class.toString();
     private Toolbar mToolbar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
+    private GridRecyclerView mRecyclerView;
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
     // Use default locale format
@@ -61,7 +63,7 @@ public class ArticleListActivity extends AppCompatActivity implements
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = (GridRecyclerView) findViewById(R.id.recycler_view);
         getLoaderManager().initLoader(0, null, this);
 
         if (savedInstanceState == null) {
@@ -112,10 +114,18 @@ public class ArticleListActivity extends AppCompatActivity implements
         Adapter adapter = new Adapter(cursor);
         adapter.setHasStableIds(true);
         mRecyclerView.setAdapter(adapter);
+
         int columnCount = getResources().getInteger(R.integer.list_column_count);
         GridLayoutManager layoutManager = new GridLayoutManager(this, columnCount, GridLayoutManager.VERTICAL, false);
-
         mRecyclerView.setLayoutManager(layoutManager);
+
+        /*
+            Grid RecyclerView Animation implemented following guide
+            @ https://proandroiddev.com/enter-animation-using-recyclerview-and-layoutanimation-part-2-grids-688829b1d29b
+         */
+        LayoutAnimationController animationController = AnimationUtils.loadLayoutAnimation(this, R.anim.grid_layout_from_bottom);
+        mRecyclerView.setLayoutAnimation(animationController);
+
     }
 
     @Override
