@@ -18,6 +18,8 @@ import java.util.GregorianCalendar;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.animation.DynamicAnimation;
+import android.support.animation.SpringAnimation;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -36,7 +38,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.AnimationUtils;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
-
+//TODO Animate text block (title + body) to indicate page scrolls
 /**
  * A fragment representing a single Article detail screen. This fragment is
  * either contained in a {@link ArticleListActivity} in two-pane mode (on
