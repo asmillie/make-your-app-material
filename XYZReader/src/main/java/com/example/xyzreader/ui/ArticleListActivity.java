@@ -154,11 +154,13 @@ public class ArticleListActivity extends AppCompatActivity implements
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    final long itemId = getItemId(vh.getAdapterPosition());
                     Intent intent = new Intent(Intent.ACTION_VIEW,
-                            ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition())));
+                            ItemsContract.Items.buildItemUri(itemId));
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        String transitionName = getString(R.string.article_image_transition_name) + itemId;
                         ActivityOptions options = ActivityOptions
-                                .makeSceneTransitionAnimation(ArticleListActivity.this, articleImage, getString(R.string.article_image_transition_name));
+                                .makeSceneTransitionAnimation(ArticleListActivity.this, articleImage, transitionName);
                         startActivity(intent, options.toBundle());
                     } else {
                         startActivity(intent);
@@ -203,6 +205,10 @@ public class ArticleListActivity extends AppCompatActivity implements
                     mCursor.getString(ArticleLoader.Query.THUMB_URL),
                     ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
             holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.thumbnailView.setTransitionName(getString(R.string.article_image_transition_name) + position);
+            }
         }
 
         @Override

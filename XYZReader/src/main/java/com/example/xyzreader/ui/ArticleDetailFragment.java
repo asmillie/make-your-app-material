@@ -239,6 +239,11 @@ public class ArticleDetailFragment extends Fragment implements
             //@ https://study-hall.udacity.com/rooms/community:nd801:630718-project-63/community:thread-10090324277-509429?contextType=room
             //Not a solution for a production app, would need to divide up text into smaller parts and load through a RecyclerView
             bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).substring(0,1000).replaceAll("(\r\n|\n)", "<br />")));
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mPhotoView.setTransitionName(getString(R.string.article_image_transition_name) + mCursor.getInt(ArticleLoader.Query._ID));
+            }
+
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
