@@ -1,6 +1,5 @@
 package com.example.xyzreader;
 
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewTreeObserver;

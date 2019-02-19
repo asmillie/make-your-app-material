@@ -248,7 +248,7 @@ public class ArticleDetailFragment extends Fragment implements
                                 Palette p = Palette.generate(bitmap, 12);
                                 mMutedColor = p.getDarkMutedColor(0xFF333333);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
-
+                                AnimationUtils.scheduleStartPostponedTransition(getActivity(), mPhotoView);
                                 mRootView.findViewById(R.id.meta_bar)
                                         .setBackgroundColor(mMutedColor);
                                 updateStatusBar();
@@ -314,7 +314,7 @@ public class ArticleDetailFragment extends Fragment implements
     private void animateScrollView() {
         Log.i(TAG, "Calling scroll animation");
         ObjectAnimator animateScrollUp = ObjectAnimator.ofInt(mScrollView, "scrollY", 120);
-        animateScrollUp.setDuration(300);
+        animateScrollUp.setDuration(500);
         animateScrollUp.start();
     }
 }
