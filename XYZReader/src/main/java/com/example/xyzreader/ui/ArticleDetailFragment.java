@@ -1,5 +1,7 @@
 package com.example.xyzreader.ui;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -255,6 +257,8 @@ public class ArticleDetailFragment extends Fragment implements
 
                         }
                     });
+
+            animateScrollView();
         } else {
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
@@ -302,5 +306,18 @@ public class ArticleDetailFragment extends Fragment implements
         return mIsCard
                 ? (int) mPhotoContainerView.getTranslationY() + mPhotoView.getHeight() - mScrollY
                 : mPhotoView.getHeight() - mScrollY;
+    }
+
+    private void animateScrollView() {
+        Log.i(TAG, "Calling scroll animation");
+        ObjectAnimator animateScrollUp = ObjectAnimator.ofInt(mScrollView, "scrollY", 500);
+        animateScrollUp.setDuration(3000);
+
+        ObjectAnimator animateScrollDown = ObjectAnimator.ofInt(mScrollView, "scrollY", -50);
+        animateScrollDown.setDuration(1000);
+
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(animateScrollDown).after(animateScrollUp);
+        animatorSet.start();
     }
 }
