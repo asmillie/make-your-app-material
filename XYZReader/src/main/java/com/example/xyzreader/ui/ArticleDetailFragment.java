@@ -235,7 +235,10 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
+            //Truncate body text to speed up loading the views as suggested by Nanodegree Mentor
+            //@ https://study-hall.udacity.com/rooms/community:nd801:630718-project-63/community:thread-10090324277-509429?contextType=room
+            //Not a solution for a production app, would need to divide up text into smaller parts and load through a RecyclerView
+            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).substring(0,1000).replaceAll("(\r\n|\n)", "<br />")));
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
@@ -310,14 +313,8 @@ public class ArticleDetailFragment extends Fragment implements
 
     private void animateScrollView() {
         Log.i(TAG, "Calling scroll animation");
-        ObjectAnimator animateScrollUp = ObjectAnimator.ofInt(mScrollView, "scrollY", 500);
-        animateScrollUp.setDuration(3000);
-
-        ObjectAnimator animateScrollDown = ObjectAnimator.ofInt(mScrollView, "scrollY", -50);
-        animateScrollDown.setDuration(1000);
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(animateScrollDown).after(animateScrollUp);
-        animatorSet.start();
+        ObjectAnimator animateScrollUp = ObjectAnimator.ofInt(mScrollView, "scrollY", 120);
+        animateScrollUp.setDuration(300);
+        animateScrollUp.start();
     }
 }
