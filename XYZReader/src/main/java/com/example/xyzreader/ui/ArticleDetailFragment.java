@@ -51,7 +51,7 @@ public class ArticleDetailFragment extends Fragment implements
     private static final String TAG = "ArticleDetailFragment";
 
     public static final String ARG_ITEM_ID = "item_id";
-    private static final float PARALLAX_FACTOR = 1.25f;
+    private static final float PARALLAX_FACTOR = 1.5f;
 
     private Cursor mCursor;
     private long mItemId;
@@ -238,7 +238,7 @@ public class ArticleDetailFragment extends Fragment implements
             //Truncate body text to speed up loading the views as suggested by Nanodegree Mentor
             //@ https://study-hall.udacity.com/rooms/community:nd801:630718-project-63/community:thread-10090324277-509429?contextType=room
             //Not a solution for a production app, would need to divide up text into smaller parts and load through a RecyclerView
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).substring(0,1000).replaceAll("(\r\n|\n)", "<br />")));
+            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).substring(0,1500).replaceAll("(\r\n|\n)", "<br />")));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 mPhotoView.setTransitionName(getString(R.string.article_image_transition_name) + mCursor.getInt(ArticleLoader.Query._ID));
