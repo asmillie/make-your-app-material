@@ -2,13 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
+    android:layout_margin="@dimen/list_item_card_margin"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
+    android:elevation="@dimen/list_item_card_elevation"
     style="@style/Widget.MaterialComponents.CardView">
 
     <android.support.constraint.ConstraintLayout
