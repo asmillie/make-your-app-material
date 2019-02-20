@@ -18,8 +18,4 @@
             @transition/change_bounds</item>
     </style>
 
-    <style name="Theme.XyzReader.Detail">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
 </resources>
