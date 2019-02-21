@@ -6,7 +6,6 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?selectableItemBackground"
-    android:elevation="@dimen/list_item_card_elevation"
     style="@style/Widget.MaterialComponents.CardView">
 
     <android.support.constraint.ConstraintLayout
