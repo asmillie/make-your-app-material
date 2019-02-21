@@ -1,6 +1,5 @@
 package com.example.xyzreader.ui;
 
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Fragment;
 import android.app.LoaderManager;
@@ -10,18 +9,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import android.os.Build;
 import android.os.Bundle;
-import android.support.animation.DynamicAnimation;
-import android.support.animation.SpringAnimation;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -31,7 +21,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +29,12 @@ import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.AnimationUtils;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
-//TODO Animate text block (title + body) to indicate page scrolls
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 /**
  * A fragment representing a single Article detail screen. This fragment is
  * either contained in a {@link ArticleListActivity} in two-pane mode (on
