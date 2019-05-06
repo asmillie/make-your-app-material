@@ -1,3 +1,5 @@
-= XYZ Reader Starter Code
+= Make Your App Material
 
-This repository stores the starter code for the XYZ Reader project in Udacity's Android Nanodegree.
+For this project a mock ebook reader was provided which we were asked to apply the Material Design specifications taught in our course.
+
+To read more about Material Design visit the official website at https://material.io/design/
